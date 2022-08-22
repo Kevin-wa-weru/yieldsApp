@@ -197,7 +197,7 @@ class _AddRecordState extends State<AddRecord> {
         .toList();
 
     setState(() {
-      selectedCrop = selectedSections.first.crop!.name!;
+      selectedCrop = selectedSections.first.crop!.name;
       selectedCropID = selectedSections.first.crop!.id;
     });
 
@@ -468,17 +468,33 @@ class _AddRecordState extends State<AddRecord> {
                 height: 20,
                 width: MediaQuery.of(context).size.width - 20,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    const Text(
+                      'New Scouting',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 14,
+                          color: Colors.black54),
+                    ),
+                    const SizedBox(
+                      width: 15,
+                    ),
                     Text(
                       widget.field.name!,
                       style: const TextStyle(
                           fontWeight: FontWeight.w800,
-                          fontSize: 12,
-                          color: Colors.green),
+                          fontSize: 14,
+                          color: Colors.black54),
                     ),
                   ],
                 )),
+            const SizedBox(
+              height: 10,
+            ),
+            const Divider(),
             const SizedBox(
               height: 10,
             ),
@@ -489,7 +505,7 @@ class _AddRecordState extends State<AddRecord> {
                   'Date',
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontSize: 10,
+                    fontSize: 14,
                   ),
                 ),
               ],
@@ -507,8 +523,8 @@ class _AddRecordState extends State<AddRecord> {
                         height: 5,
                       ),
                       Container(
-                        width: MediaQuery.of(context).size.width / 2,
-                        height: 30,
+                        width: MediaQuery.of(context).size.width - 50,
+                        height: 40,
                         decoration: const BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(5)),
                           border: Border(
@@ -528,24 +544,27 @@ class _AddRecordState extends State<AddRecord> {
                               padding: const EdgeInsets.only(left: 8.0),
                               child: Text(
                                 selectedDate == null
-                                    ? '.'
+                                    ? ''
                                     : DateFormat('dd/MM/yyyy')
                                         .format(selectedDate!)
                                         .toString(),
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w600,
-                                  fontSize: 10,
+                                  fontSize: 15,
                                 ),
                               ),
                             ),
                             const Spacer(),
                             const Expanded(
-                              child: Padding(
-                                padding: EdgeInsets.only(right: 8.0),
-                                child: Icon(
-                                  Icons.calendar_month,
-                                  color: Colors.green,
-                                  size: 15,
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: Padding(
+                                  padding: EdgeInsets.only(right: 8.0),
+                                  child: Icon(
+                                    Icons.calendar_month,
+                                    color: Colors.green,
+                                    size: 25,
+                                  ),
                                 ),
                               ),
                             )
@@ -561,168 +580,111 @@ class _AddRecordState extends State<AddRecord> {
               height: 20,
             ),
             Row(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(
-                  width: 25,
+              children: const [
+                SizedBox(width: 30),
+                Text(
+                  'Section',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                  ),
                 ),
-                Column(
-                  children: [
-                    const SizedBox(
-                      width: 110,
-                      child: Text(
-                        'Section',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 10,
-                        ),
+              ],
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 30.0),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width - 50,
+                    height: 40,
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      border: Border(
+                        left: BorderSide(width: 2.0, color: Colors.green),
+                        right: BorderSide(width: 2.0, color: Colors.green),
+                        top: BorderSide(width: 2.0, color: Colors.green),
+                        bottom: BorderSide(width: 2.0, color: Colors.green),
                       ),
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width / 3,
-                        height: 30,
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          border: Border(
-                            left: BorderSide(width: 2.0, color: Colors.green),
-                            right: BorderSide(width: 2.0, color: Colors.green),
-                            top: BorderSide(width: 2.0, color: Colors.green),
-                            bottom: BorderSide(width: 2.0, color: Colors.green),
-                          ),
-                        ),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton2(
-                            dropdownElevation: 0,
-                            focusColor: Colors.transparent,
-                            isExpanded: true,
-                            hint: Row(
-                              children: const [
-                                SizedBox(
-                                  width: 4,
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton2(
+                        dropdownElevation: 0,
+                        focusColor: Colors.transparent,
+                        isExpanded: true,
+                        hint: Row(
+                          children: const [
+                            SizedBox(
+                              width: 4,
+                            ),
+                            Expanded(
+                              child: Text(
+                                'Select',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.green,
                                 ),
-                                Expanded(
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                        items: allSections
+                            .map((item) => DropdownMenuItem<String>(
+                                  value: item,
                                   child: Text(
-                                    'Select',
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w600,
+                                    item,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
                                       color: Colors.green,
                                     ),
                                     overflow: TextOverflow.ellipsis,
                                   ),
-                                ),
-                              ],
-                            ),
-                            items: allSections
-                                .map((item) => DropdownMenuItem<String>(
-                                      value: item,
-                                      child: Text(
-                                        item,
-                                        style: const TextStyle(
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.green,
-                                        ),
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ))
-                                .toList(),
-                            value: selectedSection,
-                            onChanged: (value) {
-                              setState(() {
-                                selectedSection = value as String;
-                              });
+                                ))
+                            .toList(),
+                        value: selectedSection,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedSection = value as String;
+                          });
 
-                              getCropGrownInThatSection();
-                            },
-                            icon: const Icon(
-                              Icons.arrow_downward,
-                            ),
-                            iconSize: 14,
-                            iconEnabledColor: Colors.green,
-                            iconDisabledColor: Colors.grey,
-                            buttonHeight: 40,
-                            buttonWidth: 160,
-                            buttonPadding:
-                                const EdgeInsets.only(left: 14, right: 14),
-                            buttonDecoration: const BoxDecoration(
-                              color: Colors.white,
-                            ),
-                            buttonElevation: 2,
-                            itemHeight: 40,
-                            itemPadding:
-                                const EdgeInsets.only(left: 14, right: 14),
-                            dropdownMaxHeight: 200,
-                            dropdownWidth: 200,
-                            dropdownPadding: null,
-                            dropdownDecoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(14),
-                              color: Colors.white,
-                            ),
-                            scrollbarRadius: const Radius.circular(40),
-                            scrollbarThickness: 6,
-                            scrollbarAlwaysShow: true,
-                            offset: const Offset(-20, 0),
-                          ),
+                          getCropGrownInThatSection();
+                        },
+                        icon: const Icon(
+                          Icons.arrow_downward,
                         ),
+                        iconSize: 20,
+                        iconEnabledColor: Colors.green,
+                        iconDisabledColor: Colors.grey,
+                        buttonHeight: 40,
+                        buttonWidth: 160,
+                        buttonPadding:
+                            const EdgeInsets.only(left: 14, right: 14),
+                        buttonDecoration: const BoxDecoration(
+                          color: Colors.white,
+                        ),
+                        buttonElevation: 2,
+                        itemHeight: 40,
+                        itemPadding: const EdgeInsets.only(left: 14, right: 14),
+                        dropdownMaxHeight: 200,
+                        dropdownWidth: 200,
+                        dropdownPadding: null,
+                        dropdownDecoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(14),
+                          color: Colors.white,
+                        ),
+                        scrollbarRadius: const Radius.circular(40),
+                        scrollbarThickness: 6,
+                        scrollbarAlwaysShow: true,
+                        offset: const Offset(-20, 0),
                       ),
                     ),
-                  ],
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Column(
-                  children: [
-                    const SizedBox(
-                      width: 110,
-                      child: Text(
-                        'Crop',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 10,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width / 3,
-                        height: 30,
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          border: Border(
-                            left: BorderSide(width: 2.0, color: Colors.green),
-                            right: BorderSide(width: 2.0, color: Colors.green),
-                            top: BorderSide(width: 2.0, color: Colors.green),
-                            bottom: BorderSide(width: 2.0, color: Colors.green),
-                          ),
-                        ),
-                        child: Center(
-                          child: selectedCrop == null
-                              ? Container()
-                              : Text(
-                                  selectedCrop!,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 10,
-                                  ),
-                                ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  width: 8,
+                  ),
                 ),
               ],
             ),
@@ -731,454 +693,178 @@ class _AddRecordState extends State<AddRecord> {
             ),
             Row(
               children: const [
-                SizedBox(
-                  width: 35,
+                SizedBox(width: 30),
+                Text(
+                  'Crop',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                  ),
                 ),
+              ],
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 30.0),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width - 50,
+                    height: 40,
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      border: Border(
+                        left: BorderSide(width: 2.0, color: Colors.green),
+                        right: BorderSide(width: 2.0, color: Colors.green),
+                        top: BorderSide(width: 2.0, color: Colors.green),
+                        bottom: BorderSide(width: 2.0, color: Colors.green),
+                      ),
+                    ),
+                    child: selectedCrop == null
+                        ? Container()
+                        : Padding(
+                            padding: const EdgeInsets.only(top: 8.0, left: 15),
+                            child: Text(
+                              selectedCrop!,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15,
+                                  color: Colors.green),
+                            ),
+                          ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: const [
+                SizedBox(width: 30),
                 Text(
                   'Issue Type',
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontSize: 10,
+                    fontSize: 14,
                   ),
                 ),
               ],
             ),
-            Row(
-              children: [
-                const SizedBox(
-                  width: 35,
-                ),
-                Column(
-                  children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width / 2,
-                      height: 30,
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        border: Border(
-                          left: BorderSide(width: 2.0, color: Colors.green),
-                          right: BorderSide(width: 2.0, color: Colors.green),
-                          top: BorderSide(width: 2.0, color: Colors.green),
-                          bottom: BorderSide(width: 2.0, color: Colors.green),
-                        ),
-                      ),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton2(
-                          dropdownElevation: 0,
-                          focusColor: Colors.transparent,
-                          isExpanded: true,
-                          hint: Row(
-                            children: const [
-                              SizedBox(
-                                width: 4,
-                              ),
-                              Expanded(
-                                child: Text(
-                                  'Select',
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.green,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ],
-                          ),
-                          items: allIssues
-                              .map((item) => DropdownMenuItem<String>(
-                                    value: item,
-                                    child: Text(
-                                      item,
-                                      style: const TextStyle(
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.green,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ))
-                              .toList(),
-                          value: selectedIssue,
-                          onChanged: (value) async {
-                            if (selectedSection == null) {
-                              Fluttertoast.showToast(
-                                  msg: "Pick a Section First",
-                                  toastLength: Toast.LENGTH_LONG,
-                                  gravity: ToastGravity.BOTTOM,
-                                  backgroundColor: Colors.green,
-                                  textColor: Colors.white,
-                                  fontSize: 16.0);
-                            }
-
-                            if (sectionSelected != null) {
-                              setState(() {
-                                selectedIssue = value as String;
-                                findingIssueIsLoading = true;
-                              });
-
-                              await getPestsOrDiseasesOfCrop(
-                                  resolveIssue(selectedIssue), selectedCropID);
-
-                              setState(() {
-                                findingIssueIsLoading = false;
-                              });
-                            }
-                          },
-                          icon: const Icon(
-                            Icons.arrow_downward,
-                          ),
-                          iconSize: 14,
-                          iconEnabledColor: Colors.green,
-                          iconDisabledColor: Colors.grey,
-                          buttonHeight: 40,
-                          buttonWidth: 160,
-                          buttonPadding:
-                              const EdgeInsets.only(left: 14, right: 14),
-                          buttonDecoration: const BoxDecoration(
-                            color: Colors.white,
-                          ),
-                          buttonElevation: 2,
-                          itemHeight: 40,
-                          itemPadding:
-                              const EdgeInsets.only(left: 14, right: 14),
-                          dropdownMaxHeight: 200,
-                          dropdownWidth: 200,
-                          dropdownPadding: null,
-                          dropdownDecoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(14),
-                            color: Colors.white,
-                          ),
-                          scrollbarRadius: const Radius.circular(40),
-                          scrollbarThickness: 6,
-                          scrollbarAlwaysShow: true,
-                          offset: const Offset(-20, 0),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
             const SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: const [
-                SizedBox(
-                  width: 35,
-                ),
-                Text(
-                  'Findings',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 10,
-                  ),
-                ),
-              ],
+              height: 5,
             ),
             Row(
               children: [
-                const SizedBox(
-                  width: 35,
-                ),
-                Column(
-                  children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width / 2,
-                      height: 30,
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        border: Border(
-                          left: BorderSide(width: 2.0, color: Colors.green),
-                          right: BorderSide(width: 2.0, color: Colors.green),
-                          top: BorderSide(width: 2.0, color: Colors.green),
-                          bottom: BorderSide(width: 2.0, color: Colors.green),
-                        ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 30.0),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width - 50,
+                    height: 40,
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      border: Border(
+                        left: BorderSide(width: 2.0, color: Colors.green),
+                        right: BorderSide(width: 2.0, color: Colors.green),
+                        top: BorderSide(width: 2.0, color: Colors.green),
+                        bottom: BorderSide(width: 2.0, color: Colors.green),
                       ),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton2(
-                          dropdownElevation: 0,
-                          focusColor: Colors.transparent,
-                          isExpanded: true,
-                          hint: Row(
-                            children: const [
-                              SizedBox(
-                                width: 4,
+                    ),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton2(
+                        dropdownElevation: 0,
+                        focusColor: Colors.transparent,
+                        isExpanded: true,
+                        hint: Row(
+                          children: const [
+                            SizedBox(
+                              width: 4,
+                            ),
+                            Expanded(
+                              child: Text(
+                                'Select',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.green,
+                                ),
+                                overflow: TextOverflow.ellipsis,
                               ),
-                              Expanded(
-                                child: Text(
-                                  'Select',
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.green,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ],
-                          ),
-                          items: allFindings
-                              .map((item) => DropdownMenuItem<String>(
-                                    value: item['name'],
-                                    child: Text(
-                                      item['name'],
-                                      style: const TextStyle(
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.green,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ))
-                              .toList(),
-                          value: selectedFinding,
-                          onChanged: (value) {
-                            setState(() {
-                              selectedFinding = value as String;
-
-                              List<dynamic> specificFinding = allFindings
-                                  .where((element) =>
-                                      element['name'] == selectedFinding)
-                                  .toList();
-
-                              selectedFindingID = specificFinding[0]['id'];
-                            });
-                          },
-                          icon: findingIssueIsLoading == true
-                              ? const Center(
-                                  child: SizedBox(
-                                    height: 10,
-                                    width: 10,
-                                    child: CircularProgressIndicator(
-                                      color: Colors.green,
-                                      strokeWidth: 2.0,
-                                    ),
-                                  ),
-                                )
-                              : const Icon(
-                                  Icons.arrow_downward,
-                                ),
-                          iconSize: 14,
-                          iconEnabledColor: Colors.green,
-                          iconDisabledColor: Colors.grey,
-                          buttonHeight: 40,
-                          buttonWidth: 160,
-                          buttonPadding:
-                              const EdgeInsets.only(left: 14, right: 14),
-                          buttonDecoration: const BoxDecoration(
-                            color: Colors.white,
-                          ),
-                          buttonElevation: 2,
-                          itemHeight: 40,
-                          itemPadding:
-                              const EdgeInsets.only(left: 14, right: 14),
-                          dropdownMaxHeight: 200,
-                          dropdownWidth: 200,
-                          dropdownPadding: null,
-                          dropdownDecoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(14),
-                            color: Colors.white,
-                          ),
-                          scrollbarRadius: const Radius.circular(40),
-                          scrollbarThickness: 6,
-                          scrollbarAlwaysShow: true,
-                          offset: const Offset(-20, 0),
+                            ),
+                          ],
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(
-                  width: 25,
-                ),
-                Column(
-                  children: [
-                    const SizedBox(
-                      width: 110,
-                      child: Text(
-                        'Severity',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 10,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width / 3,
-                        height: 30,
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          border: Border(
-                            left: BorderSide(width: 2.0, color: Colors.green),
-                            right: BorderSide(width: 2.0, color: Colors.green),
-                            top: BorderSide(width: 2.0, color: Colors.green),
-                            bottom: BorderSide(width: 2.0, color: Colors.green),
-                          ),
-                        ),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton2(
-                            dropdownElevation: 0,
-                            focusColor: Colors.transparent,
-                            isExpanded: true,
-                            hint: Row(
-                              children: const [
-                                SizedBox(
-                                  width: 4,
-                                ),
-                                Expanded(
+                        items: allIssues
+                            .map((item) => DropdownMenuItem<String>(
+                                  value: item,
                                   child: Text(
-                                    'Select',
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w600,
+                                    item,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
                                       color: Colors.green,
                                     ),
                                     overflow: TextOverflow.ellipsis,
                                   ),
-                                ),
-                              ],
-                            ),
-                            items: allSeverities
-                                .map((item) => DropdownMenuItem<String>(
-                                      value: item,
-                                      child: Text(
-                                        item,
-                                        style: const TextStyle(
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.green,
-                                        ),
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ))
-                                .toList(),
-                            value: severity,
-                            onChanged: (value) {
-                              setState(() {
-                                severity = value as String;
-                              });
-                            },
-                            icon: const Icon(
-                              Icons.arrow_downward,
-                            ),
-                            iconSize: 14,
-                            iconEnabledColor: Colors.green,
-                            iconDisabledColor: Colors.grey,
-                            buttonHeight: 40,
-                            buttonWidth: 160,
-                            buttonPadding:
-                                const EdgeInsets.only(left: 14, right: 14),
-                            buttonDecoration: const BoxDecoration(
-                              color: Colors.white,
-                            ),
-                            buttonElevation: 2,
-                            itemHeight: 40,
-                            itemPadding:
-                                const EdgeInsets.only(left: 14, right: 14),
-                            dropdownMaxHeight: 200,
-                            dropdownWidth: 200,
-                            dropdownPadding: null,
-                            dropdownDecoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(14),
-                              color: Colors.white,
-                            ),
-                            scrollbarRadius: const Radius.circular(40),
-                            scrollbarThickness: 6,
-                            scrollbarAlwaysShow: true,
-                            offset: const Offset(-20, 0),
-                          ),
+                                ))
+                            .toList(),
+                        value: selectedIssue,
+                        onChanged: (value) async {
+                          if (selectedSection == null) {
+                            Fluttertoast.showToast(
+                                msg: "Pick a Section First",
+                                toastLength: Toast.LENGTH_LONG,
+                                gravity: ToastGravity.BOTTOM,
+                                backgroundColor: Colors.green,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
+                          }
+
+                          if (sectionSelected != null) {
+                            setState(() {
+                              selectedIssue = value as String;
+                              findingIssueIsLoading = true;
+                            });
+
+                            await getPestsOrDiseasesOfCrop(
+                                resolveIssue(selectedIssue), selectedCropID);
+
+                            setState(() {
+                              findingIssueIsLoading = false;
+                            });
+                          }
+                        },
+                        icon: const Icon(
+                          Icons.arrow_downward,
                         ),
+                        iconSize: 20,
+                        iconEnabledColor: Colors.green,
+                        iconDisabledColor: Colors.grey,
+                        buttonHeight: 40,
+                        buttonWidth: 160,
+                        buttonPadding:
+                            const EdgeInsets.only(left: 14, right: 14),
+                        buttonDecoration: const BoxDecoration(
+                          color: Colors.white,
+                        ),
+                        buttonElevation: 2,
+                        itemHeight: 40,
+                        itemPadding: const EdgeInsets.only(left: 14, right: 14),
+                        dropdownMaxHeight: 200,
+                        dropdownWidth: 200,
+                        dropdownPadding: null,
+                        dropdownDecoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(14),
+                          color: Colors.white,
+                        ),
+                        scrollbarRadius: const Radius.circular(40),
+                        scrollbarThickness: 6,
+                        scrollbarAlwaysShow: true,
+                        offset: const Offset(-20, 0),
                       ),
                     ),
-                  ],
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Column(
-                  children: [
-                    const SizedBox(
-                      width: 110,
-                      child: Text(
-                        '% Area affected ',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 10,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width / 3,
-                        height: 30,
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          border: Border(
-                            left: BorderSide(width: 2.0, color: Colors.green),
-                            right: BorderSide(width: 2.0, color: Colors.green),
-                            top: BorderSide(width: 2.0, color: Colors.green),
-                            bottom: BorderSide(width: 2.0, color: Colors.green),
-                          ),
-                        ),
-                        child: TextFormField(
-                          style: const TextStyle(
-                              fontSize: 10, fontWeight: FontWeight.w600),
-                          keyboardType: TextInputType.phone,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: const BorderSide(
-                                  color: Colors.transparent, width: 0),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Colors.transparent, width: 0.2),
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Colors.transparent, width: 2),
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            fillColor: Colors.white,
-                            filled: true,
-                          ),
-                          onChanged: (value) {
-                            setState(() {});
-                          },
-                          controller: percentageController,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  width: 8,
+                  ),
                 ),
               ],
             ),
@@ -1187,17 +873,324 @@ class _AddRecordState extends State<AddRecord> {
             ),
             Row(
               children: const [
-                SizedBox(
-                  width: 35,
+                SizedBox(width: 30),
+                Text(
+                  'Findings',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                  ),
                 ),
+              ],
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 30.0),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width - 50,
+                    height: 40,
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      border: Border(
+                        left: BorderSide(width: 2.0, color: Colors.green),
+                        right: BorderSide(width: 2.0, color: Colors.green),
+                        top: BorderSide(width: 2.0, color: Colors.green),
+                        bottom: BorderSide(width: 2.0, color: Colors.green),
+                      ),
+                    ),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton2(
+                        dropdownElevation: 0,
+                        focusColor: Colors.transparent,
+                        isExpanded: true,
+                        hint: Row(
+                          children: const [
+                            SizedBox(
+                              width: 4,
+                            ),
+                            Expanded(
+                              child: Text(
+                                'Select',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.green,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                        items: allFindings
+                            .map((item) => DropdownMenuItem<String>(
+                                  value: item,
+                                  child: Text(
+                                    item,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.green,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ))
+                            .toList(),
+                        value: selectedFinding,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedFinding = value as String;
+
+                            List<dynamic> specificFinding = allFindings
+                                .where((element) =>
+                                    element['name'] == selectedFinding)
+                                .toList();
+
+                            selectedFindingID = specificFinding[0]['id'];
+                          });
+                        },
+                        icon: findingIssueIsLoading == true
+                            ? const Center(
+                                child: SizedBox(
+                                  height: 10,
+                                  width: 10,
+                                  child: CircularProgressIndicator(
+                                    color: Colors.green,
+                                    strokeWidth: 2.0,
+                                  ),
+                                ),
+                              )
+                            : const Icon(
+                                Icons.arrow_downward,
+                              ),
+                        iconSize: 20,
+                        iconEnabledColor: Colors.green,
+                        iconDisabledColor: Colors.grey,
+                        buttonHeight: 40,
+                        buttonWidth: 160,
+                        buttonPadding:
+                            const EdgeInsets.only(left: 14, right: 14),
+                        buttonDecoration: const BoxDecoration(
+                          color: Colors.white,
+                        ),
+                        buttonElevation: 2,
+                        itemHeight: 40,
+                        itemPadding: const EdgeInsets.only(left: 14, right: 14),
+                        dropdownMaxHeight: 200,
+                        dropdownWidth: 200,
+                        dropdownPadding: null,
+                        dropdownDecoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(14),
+                          color: Colors.white,
+                        ),
+                        scrollbarRadius: const Radius.circular(40),
+                        scrollbarThickness: 6,
+                        scrollbarAlwaysShow: true,
+                        offset: const Offset(-20, 0),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: const [
+                SizedBox(width: 30),
+                Text(
+                  'Severity',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 30.0),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width - 50,
+                    height: 40,
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      border: Border(
+                        left: BorderSide(width: 2.0, color: Colors.green),
+                        right: BorderSide(width: 2.0, color: Colors.green),
+                        top: BorderSide(width: 2.0, color: Colors.green),
+                        bottom: BorderSide(width: 2.0, color: Colors.green),
+                      ),
+                    ),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton2(
+                        dropdownElevation: 0,
+                        focusColor: Colors.transparent,
+                        isExpanded: true,
+                        hint: Row(
+                          children: const [
+                            SizedBox(
+                              width: 4,
+                            ),
+                            Expanded(
+                              child: Text(
+                                'Select',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.green,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                        items: allSeverities
+                            .map((item) => DropdownMenuItem<String>(
+                                  value: item,
+                                  child: Text(
+                                    item,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.green,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ))
+                            .toList(),
+                        value: severity,
+                        onChanged: (value) {
+                          setState(() {
+                            severity = value as String;
+                          });
+                        },
+                        icon: const Icon(
+                          Icons.arrow_downward,
+                        ),
+                        iconSize: 20,
+                        iconEnabledColor: Colors.green,
+                        iconDisabledColor: Colors.grey,
+                        buttonHeight: 40,
+                        buttonWidth: 160,
+                        buttonPadding:
+                            const EdgeInsets.only(left: 14, right: 14),
+                        buttonDecoration: const BoxDecoration(
+                          color: Colors.white,
+                        ),
+                        buttonElevation: 2,
+                        itemHeight: 40,
+                        itemPadding: const EdgeInsets.only(left: 14, right: 14),
+                        dropdownMaxHeight: 200,
+                        dropdownWidth: 200,
+                        dropdownPadding: null,
+                        dropdownDecoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(14),
+                          color: Colors.white,
+                        ),
+                        scrollbarRadius: const Radius.circular(40),
+                        scrollbarThickness: 6,
+                        scrollbarAlwaysShow: true,
+                        offset: const Offset(-20, 0),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: const [
+                SizedBox(width: 30),
+                Text(
+                  '% Area affected ',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 30.0),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width - 50,
+                    height: 40,
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      border: Border(
+                        left: BorderSide(width: 2.0, color: Colors.green),
+                        right: BorderSide(width: 2.0, color: Colors.green),
+                        top: BorderSide(width: 2.0, color: Colors.green),
+                        bottom: BorderSide(width: 2.0, color: Colors.green),
+                      ),
+                    ),
+                    child: TextFormField(
+                      style: const TextStyle(
+                          color: Colors.green,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600),
+                      keyboardType: TextInputType.phone,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: const BorderSide(
+                              color: Colors.transparent, width: 0),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              color: Colors.transparent, width: 0.2),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              color: Colors.transparent, width: 2),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        fillColor: Colors.white,
+                        filled: true,
+                      ),
+                      onChanged: (value) {
+                        setState(() {});
+                      },
+                      controller: percentageController,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: const [
+                SizedBox(width: 30),
                 Text(
                   'Comment',
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontSize: 12,
+                    fontSize: 14,
                   ),
                 ),
               ],
+            ),
+            const SizedBox(
+              height: 5,
             ),
             Row(
               children: [
@@ -1206,11 +1199,8 @@ class _AddRecordState extends State<AddRecord> {
                   width: MediaQuery.of(context).size.width / 1.0,
                   child: Column(
                     children: [
-                      const SizedBox(
-                        height: 10,
-                      ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 35.0, right: 55.0),
+                        padding: const EdgeInsets.only(left: 35.0, right: 20.0),
                         child: Container(
                           decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -1228,7 +1218,9 @@ class _AddRecordState extends State<AddRecord> {
                             child: TextFormField(
                               maxLines: maxLines,
                               style: const TextStyle(
-                                  fontSize: 10, fontWeight: FontWeight.w600),
+                                  color: Colors.green,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600),
                               keyboardType: TextInputType.name,
                               decoration: InputDecoration(
                                   fillColor: Colors.transparent,
@@ -1281,7 +1273,7 @@ class _AddRecordState extends State<AddRecord> {
                   'Photos',
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontSize: 12,
+                    fontSize: 15,
                   ),
                 ),
               ],

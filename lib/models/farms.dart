@@ -1,13 +1,15 @@
 // To parse this JSON data, do
 //
-//     final farms = farmsFromJson(jsonString);
+//     final farm = farmFromJson(jsonString);
+
+// ignore_for_file: constant_identifier_names
 
 import 'dart:convert';
 
-List<Farm> farmsFromJson(String str) =>
+List<Farm> farmFromJson(String str) =>
     List<Farm>.from(json.decode(str).map((x) => Farm.fromJson(x)));
 
-String farmsToJson(List<Farm> data) =>
+String farmToJson(List<Farm> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Farm {
@@ -70,6 +72,7 @@ class Field {
     this.longitude,
     this.sections,
     this.lastRefreshDate,
+    this.stantionId,
   });
 
   num? id;
@@ -86,6 +89,7 @@ class Field {
   String? longitude;
   List<Section>? sections;
   DateTime? lastRefreshDate;
+  String? stantionId;
 
   factory Field.fromJson(Map<String, dynamic> json) => Field(
         id: json["id"],
@@ -105,6 +109,7 @@ class Field {
         lastRefreshDate: json["lastRefreshDate"] == null
             ? null
             : DateTime.parse(json["lastRefreshDate"]),
+        stantionId: json["stantionId"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -123,6 +128,7 @@ class Field {
         "sections": List<dynamic>.from(sections!.map((x) => x.toJson())),
         "lastRefreshDate":
             lastRefreshDate == null ? null : lastRefreshDate!.toIso8601String(),
+        "stantionId": stantionId,
       };
 }
 
@@ -250,6 +256,17 @@ class Crop {
       };
 }
 
+// enum CropName { TOMATO, CORN, AVOCADO, POTATO, CUCUMBER, COFFEE }
+
+// final cropNameValues = EnumValues({
+//   "Avocado": CropName.AVOCADO,
+//   "Coffee": CropName.COFFEE,
+//   "Corn": CropName.CORN,
+//   "Cucumber": CropName.CUCUMBER,
+//   "Potato": CropName.POTATO,
+//   "Tomato": CropName.TOMATO
+// });
+
 class CropVariety {
   CropVariety({
     this.id,
@@ -270,9 +287,6 @@ class CropVariety {
     this.yieldUnitType,
     this.notes,
     this.isActive,
-    this.commonActiveIngredients,
-    this.commonPests,
-    this.commonDiseases,
     this.cropGrowthStages,
   });
 
@@ -282,7 +296,7 @@ class CropVariety {
   num? createdById;
   num? cropClassificationType;
   num? cropId;
-  String? name;
+  CropVarietyName? name;
   num? minIdealTemperature;
   num? maxIdealTemperature;
   num? minThresholdTemperature;
@@ -294,10 +308,6 @@ class CropVariety {
   num? yieldUnitType;
   String? notes;
   bool? isActive;
-  // ignore: unnecessary_question_mark
-  dynamic? commonActiveIngredients;
-  List<dynamic>? commonPests;
-  List<dynamic>? commonDiseases;
   List<dynamic>? cropGrowthStages;
 
   factory CropVariety.fromJson(Map<String, dynamic> json) => CropVariety(
@@ -307,7 +317,7 @@ class CropVariety {
         createdById: json["createdById"],
         cropClassificationType: json["cropClassificationType"],
         cropId: json["cropId"],
-        name: json["name"],
+        name: cropVarietyNameValues.map![json["name"]],
         minIdealTemperature: json["minIdealTemperature"],
         maxIdealTemperature: json["maxIdealTemperature"],
         minThresholdTemperature: json["minThresholdTemperature"],
@@ -319,10 +329,6 @@ class CropVariety {
         yieldUnitType: json["yieldUnitType"],
         notes: json["notes"],
         isActive: json["isActive"],
-        commonActiveIngredients: json["commonActiveIngredients"],
-        commonPests: List<dynamic>.from(json["commonPests"].map((x) => x)),
-        commonDiseases:
-            List<dynamic>.from(json["commonDiseases"].map((x) => x)),
         cropGrowthStages:
             List<dynamic>.from(json["cropGrowthStages"].map((x) => x)),
       );
@@ -334,7 +340,7 @@ class CropVariety {
         "createdById": createdById,
         "cropClassificationType": cropClassificationType,
         "cropId": cropId,
-        "name": name,
+        "name": cropVarietyNameValues.reverse![name],
         "minIdealTemperature": minIdealTemperature,
         "maxIdealTemperature": maxIdealTemperature,
         "minThresholdTemperature": minThresholdTemperature,
@@ -346,9 +352,28 @@ class CropVariety {
         "yieldUnitType": yieldUnitType,
         "notes": notes,
         "isActive": isActive,
-        "commonActiveIngredients": commonActiveIngredients,
-        "commonPests": List<dynamic>.from(commonPests!.map((x) => x)),
-        "commonDiseases": List<dynamic>.from(commonDiseases!.map((x) => x)),
         "cropGrowthStages": List<dynamic>.from(cropGrowthStages!.map((x) => x)),
       };
+}
+
+enum CropVarietyName { GENERAL, THE_2700_GDD_HYBRIDS, HASS, ARABICA }
+
+final cropVarietyNameValues = EnumValues({
+  "Arabica": CropVarietyName.ARABICA,
+  "General": CropVarietyName.GENERAL,
+  "Hass": CropVarietyName.HASS,
+  "2700 GDD Hybrids": CropVarietyName.THE_2700_GDD_HYBRIDS
+});
+
+class EnumValues<T> {
+  Map<String, T>? map;
+  Map<T, String>? reverseMap;
+
+  EnumValues(this.map);
+
+  Map<T, String>? get reverse {
+    // ignore: unnecessary_new
+    reverseMap ??= map!.map((k, v) => new MapEntry(v, k));
+    return reverseMap;
+  }
 }

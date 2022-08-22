@@ -135,12 +135,16 @@ class _SingleFieldState extends State<SingleField> {
 
     http.Response response = await http.post(
         Uri.parse(
-            'https://yieldsapp.azurewebsites.net/api/Treatments/load-treatment-recommendations'),
+            'https://yieldsapp.azurewebsites.net/api/Treatments/load-treatments'),
         headers: {
           "Content-Type": "application/json",
           "Authorization": "Bearer ${widget.token}",
         },
         body: json.encode(mapdetails));
+    print('Rffffffffffffffff');
+    print(widget.token);
+    print(widget.field.id);
+    print(jsonDecode(response.body));
 
     if (response.body.isNotEmpty) {
       var data = jsonDecode(response.body);

@@ -11,12 +11,12 @@ class AlertExpandavle extends StatefulWidget {
 }
 
 class _AlertExpandavleState extends State<AlertExpandavle> {
-  void _modalBottomSheetMenu(message) {
+  void _modalBottomSheetMenu(message, date) {
     showModalBottomSheet(
         context: context,
         builder: (builder) {
           return Container(
-            height: 50.0,
+            height: MediaQuery.of(context).size.height / 2,
             color: Colors.transparent,
             child: Container(
                 decoration: const BoxDecoration(
@@ -25,13 +25,56 @@ class _AlertExpandavleState extends State<AlertExpandavle> {
                         topLeft: Radius.circular(10.0),
                         topRight: Radius.circular(10.0))),
                 child: Center(
-                  child: Text(
-                    message,
-                    style: const TextStyle(
-                      color: Colors.black54,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 10,
-                    ),
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const Text(
+                        'Message',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 20,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          message,
+                          style: const TextStyle(
+                            color: Colors.black54,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Text(
+                        'Date',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 20,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Center(
+                        child: Text(
+                          date,
+                          style: const TextStyle(
+                            color: Colors.black54,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 )),
           );
@@ -47,7 +90,8 @@ class _AlertExpandavleState extends State<AlertExpandavle> {
             children: widget.allalerts
                 .map((alert) => InkWell(
                       onTap: () {
-                        _modalBottomSheetMenu(alert['message']);
+                        _modalBottomSheetMenu(alert['message'],
+                            '${DateFormat("MMM").format(DateTime.parse(alert['date']))} ${DateTime.parse(alert['date']).day} ${DateTime.parse(alert['date']).year}');
                       },
                       child: Column(
                         children: [

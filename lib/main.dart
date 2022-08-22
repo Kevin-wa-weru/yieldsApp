@@ -43,7 +43,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late GoogleMapController _controller;
   List<Marker> allMarkers = [];
-  late PageController _pageController;
+  int mSelectedPosition = 0;
+  late PageController _pageController = PageController(initialPage: 0);
   late int prevPage = 0;
   Set<Polygon> allPolygons = {};
   // ignore: prefer_final_fields
@@ -339,6 +340,8 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  var currentPageValue = 0.0;
+
   @override
   void initState() {
     super.initState();
@@ -353,7 +356,15 @@ class _HomePageState extends State<HomePage> {
         position: widget.userLocation!));
 
     _pageController = PageController(initialPage: 0, viewportFraction: 0.8)
-      ..addListener(_onScroll);
+      ..addListener(
+        _onScroll,
+      );
+
+    _pageController.addListener(() {
+      setState(() {
+        currentPageValue = _pageController.page!;
+      });
+    });
   }
 
   void _onScroll() {
@@ -920,14 +931,31 @@ class _HomePageState extends State<HomePage> {
                             .where((element) => element.name == selectedField)
                             .toList();
 
-                        LatLng newlatlang = LatLng(
-                            double.parse(specificField[0].latitude!),
-                            double.parse(specificField[0].longitude!));
-                        _controller.animateCamera(
-                            CameraUpdate.newCameraPosition(
-                                CameraPosition(target: newlatlang, zoom: 17)
-                                //17 is new zoom level
-                                ));
+                        int specificFieldIndex =
+                            fieldsOfFarmSelected.indexWhere(
+                                (element) => element.name == selectedField);
+
+                        _pageController.animateToPage(specificFieldIndex,
+                            curve: Curves.easeInOut,
+                            duration: const Duration(seconds: 1));
+
+                        if (specificField[0].latitude != null) {
+                          LatLng newlatlang = LatLng(
+                              double.parse(specificField[0].latitude!),
+                              double.parse(specificField[0].longitude!));
+
+                          _controller.animateCamera(
+                              CameraUpdate.newCameraPosition(
+                                  CameraPosition(target: newlatlang, zoom: 17)
+                                  //17 is new zoom level
+                                  ));
+                        } else {
+                          _controller.animateCamera(
+                              CameraUpdate.newCameraPosition(CameraPosition(
+                                      target: widget.userLocation!, zoom: 17)
+                                  //17 is new zoom level
+                                  ));
+                        }
                       },
                       icon: const Icon(
                         Icons.arrow_downward,
