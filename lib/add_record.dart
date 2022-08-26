@@ -112,6 +112,7 @@ class _AddRecordState extends State<AddRecord> {
 
     if (response.body.isNotEmpty) {
       var data = json.decode(response.body);
+      print(data);
 
       //success
       if (data.toString().contains('comments')) {
@@ -927,9 +928,9 @@ class _AddRecordState extends State<AddRecord> {
                         ),
                         items: allFindings
                             .map((item) => DropdownMenuItem<String>(
-                                  value: item,
+                                  value: item['name'],
                                   child: Text(
-                                    item,
+                                    item['name'],
                                     style: const TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.bold,

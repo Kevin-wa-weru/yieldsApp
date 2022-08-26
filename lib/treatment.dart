@@ -17,14 +17,33 @@ class TreatmentExpandavle extends StatefulWidget {
 
 class _TreatmentExpandavleState extends State<TreatmentExpandavle> {
   Future changeStatusofTreatment(bool value, treatmentID) async {
+    resolveStatus(bool value) {
+      if (value == false) {
+        return 0;
+      } else {
+        return 1;
+      }
+    }
+
+    print(resolveStatus(value));
+
+    print(treatmentID);
+    print('WEEEEEEEEEEEEEEEEEEE');
+    print(widget.token);
+    Map mapdetails = {"id": 1403, "status": resolveStatus(value)};
+
     try {
-      http.Response response = await http.get(
+      http.Response response = await http.post(
           Uri.parse(
-              'https://yieldsapp.azurewebsites.net/api/Treatments/accept-treatment?id=$treatmentID'),
+              'https://yieldsapp.azurewebsites.net/api/Treatments/change-status'),
           headers: {
             "Content-Type": "application/json",
             "Authorization": "Bearer ${widget.token}",
-          });
+          },
+          body: json.encode(mapdetails));
+
+      print('RRRRRREEEEEEEEE');
+      print(jsonDecode(response.body));
 
       if (response.body.isNotEmpty) {
         var data = jsonDecode(response.body);
@@ -117,12 +136,20 @@ class _TreatmentExpandavleState extends State<TreatmentExpandavle> {
                               child: CupertinoSwitch(
                                 activeColor: Colors.green,
                                 trackColor: Colors.grey,
-                                value: treatment['isAccept'],
+                                value: treatment['status'] == 0 ? false : true,
                                 onChanged: (value) async {
                                   //first update ui before sending to server
-                                  setState(() {
-                                    treatment['isAccept'] = value;
-                                  });
+                                  if (value == true) {
+                                    setState(() {
+                                      treatment['status'] = 1;
+                                    });
+                                  }
+
+                                  if (value == false) {
+                                    setState(() {
+                                      treatment['status'] = 0;
+                                    });
+                                  }
 
                                   await changeStatusofTreatment(
                                       value, treatment['id']);

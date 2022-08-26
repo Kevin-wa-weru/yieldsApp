@@ -62,140 +62,122 @@ class _AddImagesState extends State<AddImages> {
   }
 
   Future uploadPhotos() async {
-    final apiurl = Uri.parse("https://member.hsgroup.tech/api/v2/register");
+//One image picked
+    if (selectedPhotos[0] != null && selectedPhotos[1] == null) {
+      var apiurl =
+          "https://yieldsapp.azurewebsites.net/api/scouting/upload-photos";
 
-    final request = http.MultipartRequest("POST", apiurl)
-      ..fields["ScoutingId"] = widget.scoutingid.toString();
+      Map mapScoutingDetails = {
+        "scoutingId": widget.scoutingid,
+        "scoutingPhotos": [selectedPhotos[0].readAsBytesSync()]
+      };
 
-    request.headers.addAll({
-      "Content-Type": "application/json",
-      "Authorization": "Bearer ${widget.token}",
-    });
+      http.Response response = await http.post(Uri.parse(apiurl),
+          body: jsonEncode(mapScoutingDetails),
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer ${widget.token}",
+          });
 
-    if (selectedPhotos.length == 1) {
-      request.files.addAll([
-        await http.MultipartFile.fromPath(
-          'image',
-          selectedPhotos[0],
-          contentType: MediaType('application', 'png'),
-        ),
-      ]);
-
-      final streamedResponse = await request.send();
-
-      final response = await http.Response.fromStream(streamedResponse);
-      // ignore: unused_local_variable
-      var data = jsonDecode(response.body);
+      return response.statusCode;
     }
-    if (selectedPhotos.length == 2) {
-      request.files.addAll([
-        await http.MultipartFile.fromPath(
-          'image',
-          selectedPhotos[0].path,
-          contentType: MediaType('application', 'png'),
-        ),
-        await http.MultipartFile.fromPath(
-          'image',
-          selectedPhotos[1].path,
-          contentType: MediaType('application', 'png'),
-        ),
-      ]);
 
-      final streamedResponse = await request.send();
+    //Two images picked
+    if (selectedPhotos[1] != null && selectedPhotos[2] == null) {
+      var apiurl =
+          "https://yieldsapp.azurewebsites.net/api/scouting/upload-photos";
 
-      final response = await http.Response.fromStream(streamedResponse);
-      // ignore: unused_local_variable
-      var data = jsonDecode(response.body);
+      Map mapScoutingDetails = {
+        "scoutingId": widget.scoutingid,
+        "scoutingPhotos": [
+          selectedPhotos[0].readAsBytesSync(),
+          selectedPhotos[1].readAsBytesSync()
+        ]
+      };
+
+      http.Response response = await http.post(Uri.parse(apiurl),
+          body: jsonEncode(mapScoutingDetails),
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer ${widget.token}",
+          });
+
+      return response.statusCode;
     }
-    if (selectedPhotos.length == 3) {
-      request.files.addAll([
-        await http.MultipartFile.fromPath(
-          'image',
-          selectedPhotos[0].path,
-          contentType: MediaType('application', 'png'),
-        ),
-        await http.MultipartFile.fromPath(
-          'image',
-          selectedPhotos[1].path,
-          contentType: MediaType('application', 'png'),
-        ),
-        await http.MultipartFile.fromPath(
-          'image',
-          selectedPhotos[2].path,
-          contentType: MediaType('application', 'png'),
-        )
-      ]);
 
-      final streamedResponse = await request.send();
+    //Three images picked
+    if (selectedPhotos[2] != null && selectedPhotos[3] == null) {
+      var apiurl =
+          "https://yieldsapp.azurewebsites.net/api/scouting/upload-photos";
 
-      final response = await http.Response.fromStream(streamedResponse);
-      // ignore: unused_local_variable
-      var data = jsonDecode(response.body);
+      Map mapScoutingDetails = {
+        "scoutingId": widget.scoutingid,
+        "scoutingPhotos": [
+          selectedPhotos[0].readAsBytesSync(),
+          selectedPhotos[1].readAsBytesSync(),
+          selectedPhotos[2].readAsBytesSync()
+        ]
+      };
+
+      http.Response response = await http.post(Uri.parse(apiurl),
+          body: jsonEncode(mapScoutingDetails),
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer ${widget.token}",
+          });
+
+      return response.statusCode;
     }
-    if (selectedPhotos.length == 4) {
-      request.files.addAll([
-        await http.MultipartFile.fromPath(
-          'image',
-          selectedPhotos[0].path,
-          contentType: MediaType('application', 'png'),
-        ),
-        await http.MultipartFile.fromPath(
-          'image',
-          selectedPhotos[1].path,
-          contentType: MediaType('application', 'png'),
-        ),
-        await http.MultipartFile.fromPath(
-          'image',
-          selectedPhotos[2].path,
-          contentType: MediaType('application', 'png'),
-        ),
-        await http.MultipartFile.fromPath(
-          'image',
-          selectedPhotos[3].path,
-          contentType: MediaType('application', 'png'),
-        )
-      ]);
 
-      final streamedResponse = await request.send();
+    //Four images picked
+    if (selectedPhotos[3] != null && selectedPhotos[4] == null) {
+      var apiurl =
+          "https://yieldsapp.azurewebsites.net/api/scouting/upload-photos";
 
-      final response = await http.Response.fromStream(streamedResponse);
-      // ignore: unused_local_variable
-      var data = jsonDecode(response.body);
+      Map mapScoutingDetails = {
+        "scoutingId": widget.scoutingid,
+        "scoutingPhotos": [
+          selectedPhotos[0].readAsBytesSync(),
+          selectedPhotos[1].readAsBytesSync(),
+          selectedPhotos[2].readAsBytesSync(),
+          selectedPhotos[3].readAsBytesSync()
+        ]
+      };
+
+      http.Response response = await http.post(Uri.parse(apiurl),
+          body: jsonEncode(mapScoutingDetails),
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer ${widget.token}",
+          });
+
+      return response.statusCode;
     }
-    if (selectedPhotos.length == 5) {
-      request.files.addAll([
-        await http.MultipartFile.fromPath(
-          'image',
-          selectedPhotos[0].path,
-          contentType: MediaType('application', 'png'),
-        ),
-        await http.MultipartFile.fromPath(
-          'image',
-          selectedPhotos[1].path,
-          contentType: MediaType('application', 'png'),
-        ),
-        await http.MultipartFile.fromPath(
-          'image',
-          selectedPhotos[2].path,
-          contentType: MediaType('application', 'png'),
-        ),
-        await http.MultipartFile.fromPath(
-          'image',
-          selectedPhotos[3].path,
-          contentType: MediaType('application', 'png'),
-        ),
-        await http.MultipartFile.fromPath(
-          'image',
-          selectedPhotos[4].path,
-          contentType: MediaType('application', 'png'),
-        )
-      ]);
 
-      final streamedResponse = await request.send();
+    //if five images have been picked
+    if (selectedPhotos[4] != null) {
+      var apiurl =
+          "https://yieldsapp.azurewebsites.net/api/scouting/upload-photos";
 
-      final response = await http.Response.fromStream(streamedResponse);
-      // ignore: unused_local_variable
-      var data = jsonDecode(response.body);
+      Map mapScoutingDetails = {
+        "scoutingId": widget.scoutingid,
+        "scoutingPhotos": [
+          selectedPhotos[0].readAsBytesSync(),
+          selectedPhotos[1].readAsBytesSync(),
+          selectedPhotos[2].readAsBytesSync(),
+          selectedPhotos[3].readAsBytesSync(),
+          selectedPhotos[4].readAsBytesSync()
+        ]
+      };
+
+      http.Response response = await http.post(Uri.parse(apiurl),
+          body: jsonEncode(mapScoutingDetails),
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer ${widget.token}",
+          });
+
+      return response.statusCode;
     }
   }
 
@@ -268,7 +250,25 @@ class _AddImagesState extends State<AddImages> {
                           showSpinner = true;
                         });
 
-                        await uploadPhotos();
+                        var response = await uploadPhotos();
+
+                        if (response == 200) {
+                          Fluttertoast.showToast(
+                              msg: "Images uploaded",
+                              toastLength: Toast.LENGTH_LONG,
+                              gravity: ToastGravity.BOTTOM,
+                              backgroundColor: Colors.green,
+                              textColor: Colors.white,
+                              fontSize: 16.0);
+                        } else {
+                          Fluttertoast.showToast(
+                              msg: "There was an issue uploading images",
+                              toastLength: Toast.LENGTH_LONG,
+                              gravity: ToastGravity.BOTTOM,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0);
+                        }
 
                         setState(() {
                           showSpinner = false;

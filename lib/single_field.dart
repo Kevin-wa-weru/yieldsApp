@@ -141,17 +141,39 @@ class _SingleFieldState extends State<SingleField> {
           "Authorization": "Bearer ${widget.token}",
         },
         body: json.encode(mapdetails));
+
+    http.Response response2 = await http.post(
+        Uri.parse(
+            'https://yieldsapp.azurewebsites.net/api/treatments/load-treatment-recommendations'),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer ${widget.token}",
+        },
+        body: json.encode(mapdetails));
+
     print('Rffffffffffffffff');
+    print(response.body);
     print(widget.token);
     print(widget.field.id);
     print(jsonDecode(response.body));
 
     if (response.body.isNotEmpty) {
       var data = jsonDecode(response.body);
+      var data2 = jsonDecode(response2.body);
+
+      print('fffFFFFFFFFFFFr');
+      print(data2);
 
       setState(() {
         treatmentsData = data['data'];
       });
+
+      for (var single in data2['data']) {
+        treatmentsData.add(single);
+      }
+
+      print('TRrrrrrr');
+      print(treatmentsData);
 
       setState(() {
         expansionItems.add(
@@ -171,6 +193,7 @@ class _SingleFieldState extends State<SingleField> {
                     )
                   : TreatmentExpandavle(
                       alltratements: treatmentsData,
+                      token: widget.token,
                     ),
               svgUrl: 'assets/kit.svg',
               isExpanded: false),
