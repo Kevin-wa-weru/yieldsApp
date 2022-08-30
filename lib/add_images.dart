@@ -1,6 +1,9 @@
+// ignore_for_file: unnecessary_new
+
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -64,120 +67,157 @@ class _AddImagesState extends State<AddImages> {
   Future uploadPhotos() async {
 //One image picked
     if (selectedPhotos[0] != null && selectedPhotos[1] == null) {
-      var apiurl =
-          "https://yieldsapp.azurewebsites.net/api/scouting/upload-photos";
+      var dio = Dio();
 
-      Map mapScoutingDetails = {
-        "scoutingId": widget.scoutingid,
-        "scoutingPhotos": [selectedPhotos[0].readAsBytesSync()]
-      };
+      var filed = await MultipartFile.fromFile(selectedPhotos[0].path);
 
-      http.Response response = await http.post(Uri.parse(apiurl),
-          body: jsonEncode(mapScoutingDetails),
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer ${widget.token}",
-          });
+      List imaged = [];
 
-      return response.statusCode;
+      imaged.add(filed);
+
+      FormData formData = FormData.fromMap(
+          {"scoutingId": widget.scoutingid, "scoutingPhotos": imaged});
+
+      dio.options.headers['Content-Type'] = 'application/json';
+      dio.options.headers["Authorization"] = "Bearer ${widget.token}";
+
+      Response response = await dio.post(
+          "https://yieldsapp.azurewebsites.net/api/scouting/upload-photos",
+          data: formData);
+
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
     }
 
     //Two images picked
     if (selectedPhotos[1] != null && selectedPhotos[2] == null) {
-      var apiurl =
-          "https://yieldsapp.azurewebsites.net/api/scouting/upload-photos";
+      var dio = Dio();
 
-      Map mapScoutingDetails = {
-        "scoutingId": widget.scoutingid,
-        "scoutingPhotos": [
-          selectedPhotos[0].readAsBytesSync(),
-          selectedPhotos[1].readAsBytesSync()
-        ]
-      };
+      var filed = await MultipartFile.fromFile(selectedPhotos[0].path);
+      var filed2 = await MultipartFile.fromFile(selectedPhotos[1].path);
 
-      http.Response response = await http.post(Uri.parse(apiurl),
-          body: jsonEncode(mapScoutingDetails),
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer ${widget.token}",
-          });
+      List imaged = [];
 
-      return response.statusCode;
+      imaged.add(filed);
+      imaged.add(filed2);
+
+      FormData formData = FormData.fromMap(
+          {"scoutingId": widget.scoutingid, "scoutingPhotos": imaged});
+
+      dio.options.headers['Content-Type'] = 'application/json';
+      dio.options.headers["Authorization"] = "Bearer ${widget.token}";
+
+      Response response = await dio.post(
+          "https://yieldsapp.azurewebsites.net/api/scouting/upload-photos",
+          data: formData);
+
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
     }
 
     //Three images picked
     if (selectedPhotos[2] != null && selectedPhotos[3] == null) {
-      var apiurl =
-          "https://yieldsapp.azurewebsites.net/api/scouting/upload-photos";
+      var dio = Dio();
 
-      Map mapScoutingDetails = {
-        "scoutingId": widget.scoutingid,
-        "scoutingPhotos": [
-          selectedPhotos[0].readAsBytesSync(),
-          selectedPhotos[1].readAsBytesSync(),
-          selectedPhotos[2].readAsBytesSync()
-        ]
-      };
+      var filed = await MultipartFile.fromFile(selectedPhotos[0].path);
+      var filed2 = await MultipartFile.fromFile(selectedPhotos[1].path);
+      var filed3 = await MultipartFile.fromFile(selectedPhotos[2].path);
 
-      http.Response response = await http.post(Uri.parse(apiurl),
-          body: jsonEncode(mapScoutingDetails),
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer ${widget.token}",
-          });
+      List imaged = [];
 
-      return response.statusCode;
+      imaged.add(filed);
+      imaged.add(filed2);
+      imaged.add(filed3);
+
+      FormData formData = FormData.fromMap(
+          {"scoutingId": widget.scoutingid, "scoutingPhotos": imaged});
+
+      dio.options.headers['Content-Type'] = 'application/json';
+      dio.options.headers["Authorization"] = "Bearer ${widget.token}";
+
+      Response response = await dio.post(
+          "https://yieldsapp.azurewebsites.net/api/scouting/upload-photos",
+          data: formData);
+
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
     }
 
     //Four images picked
     if (selectedPhotos[3] != null && selectedPhotos[4] == null) {
-      var apiurl =
-          "https://yieldsapp.azurewebsites.net/api/scouting/upload-photos";
+      var dio = Dio();
 
-      Map mapScoutingDetails = {
-        "scoutingId": widget.scoutingid,
-        "scoutingPhotos": [
-          selectedPhotos[0].readAsBytesSync(),
-          selectedPhotos[1].readAsBytesSync(),
-          selectedPhotos[2].readAsBytesSync(),
-          selectedPhotos[3].readAsBytesSync()
-        ]
-      };
+      var filed = await MultipartFile.fromFile(selectedPhotos[0].path);
+      var filed2 = await MultipartFile.fromFile(selectedPhotos[1].path);
+      var filed3 = await MultipartFile.fromFile(selectedPhotos[2].path);
+      var filed4 = await MultipartFile.fromFile(selectedPhotos[3].path);
 
-      http.Response response = await http.post(Uri.parse(apiurl),
-          body: jsonEncode(mapScoutingDetails),
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer ${widget.token}",
-          });
+      List imaged = [];
 
-      return response.statusCode;
+      imaged.add(filed);
+      imaged.add(filed2);
+      imaged.add(filed3);
+      imaged.add(filed4);
+
+      FormData formData = FormData.fromMap(
+          {"scoutingId": widget.scoutingid, "scoutingPhotos": imaged});
+
+      dio.options.headers['Content-Type'] = 'application/json';
+      dio.options.headers["Authorization"] = "Bearer ${widget.token}";
+
+      Response response = await dio.post(
+          "https://yieldsapp.azurewebsites.net/api/scouting/upload-photos",
+          data: formData);
+
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
     }
 
     //if five images have been picked
     if (selectedPhotos[4] != null) {
-      var apiurl =
-          "https://yieldsapp.azurewebsites.net/api/scouting/upload-photos";
+      var dio = Dio();
 
-      Map mapScoutingDetails = {
-        "scoutingId": widget.scoutingid,
-        "scoutingPhotos": [
-          selectedPhotos[0].readAsBytesSync(),
-          selectedPhotos[1].readAsBytesSync(),
-          selectedPhotos[2].readAsBytesSync(),
-          selectedPhotos[3].readAsBytesSync(),
-          selectedPhotos[4].readAsBytesSync()
-        ]
-      };
+      var filed = await MultipartFile.fromFile(selectedPhotos[0].path);
+      var filed2 = await MultipartFile.fromFile(selectedPhotos[1].path);
+      var filed3 = await MultipartFile.fromFile(selectedPhotos[2].path);
+      var filed4 = await MultipartFile.fromFile(selectedPhotos[3].path);
+      var filed5 = await MultipartFile.fromFile(selectedPhotos[3].path);
 
-      http.Response response = await http.post(Uri.parse(apiurl),
-          body: jsonEncode(mapScoutingDetails),
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer ${widget.token}",
-          });
+      List imaged = [];
 
-      return response.statusCode;
+      imaged.add(filed);
+      imaged.add(filed2);
+      imaged.add(filed3);
+      imaged.add(filed4);
+      imaged.add(filed5);
+
+      FormData formData = FormData.fromMap(
+          {"scoutingId": widget.scoutingid, "scoutingPhotos": imaged});
+
+      dio.options.headers['Content-Type'] = 'application/json';
+      dio.options.headers["Authorization"] = "Bearer ${widget.token}";
+
+      Response response = await dio.post(
+          "https://yieldsapp.azurewebsites.net/api/scouting/upload-photos",
+          data: formData);
+
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 
@@ -252,7 +292,7 @@ class _AddImagesState extends State<AddImages> {
 
                         var response = await uploadPhotos();
 
-                        if (response == 200) {
+                        if (response == true) {
                           Fluttertoast.showToast(
                               msg: "Images uploaded",
                               toastLength: Toast.LENGTH_LONG,
@@ -497,76 +537,76 @@ class _AddImagesState extends State<AddImages> {
               ),
             ),
           ),
-          Row(
-            children: const [
-              SizedBox(
-                width: 10,
-              ),
-              Text(
-                'I have detected leasions on leaf. I have a few questions to ask ',
-                style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 12,
-                    color: Colors.black54),
-              ),
-            ],
-          ),
+          // Row(
+          //   children: const [
+          //     SizedBox(
+          //       width: 10,
+          //     ),
+          //     Text(
+          //       'I have detected leasions on leaf. I have a few questions to ask ',
+          //       style: TextStyle(
+          //           fontWeight: FontWeight.w600,
+          //           fontSize: 12,
+          //           color: Colors.black54),
+          //     ),
+          //   ],
+          // ),
           const SizedBox(
             height: 40,
           ),
-          Row(
-            children: [
-              const SizedBox(
-                width: 10,
-              ),
-              const Text(
-                'Do you see target like lessions on the leaf? ',
-                style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 12,
-                    color: Colors.black54),
-              ),
-              Container(
-                width: 40,
-                height: 20,
-                decoration: const BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                ),
-                child: const Center(
-                  child: Text(
-                    'Yes',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 10,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Container(
-                width: 40,
-                height: 20,
-                decoration: const BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                ),
-                child: const Center(
-                  child: Text(
-                    'No',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 10,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+          // Row(
+          //   children: [
+          //     const SizedBox(
+          //       width: 10,
+          //     ),
+          //     const Text(
+          //       'Do you see target like lessions on the leaf? ',
+          //       style: TextStyle(
+          //           fontWeight: FontWeight.w600,
+          //           fontSize: 12,
+          //           color: Colors.black54),
+          //     ),
+          //     Container(
+          //       width: 40,
+          //       height: 20,
+          //       decoration: const BoxDecoration(
+          //         color: Colors.blue,
+          //         borderRadius: BorderRadius.all(Radius.circular(5)),
+          //       ),
+          //       child: const Center(
+          //         child: Text(
+          //           'Yes',
+          //           style: TextStyle(
+          //             color: Colors.white,
+          //             fontSize: 10,
+          //             fontWeight: FontWeight.w600,
+          //           ),
+          //         ),
+          //       ),
+          //     ),
+          //     const SizedBox(
+          //       width: 10,
+          //     ),
+          //     Container(
+          //       width: 40,
+          //       height: 20,
+          //       decoration: const BoxDecoration(
+          //         color: Colors.red,
+          //         borderRadius: BorderRadius.all(Radius.circular(5)),
+          //       ),
+          //       child: const Center(
+          //         child: Text(
+          //           'No',
+          //           style: TextStyle(
+          //             color: Colors.white,
+          //             fontSize: 10,
+          //             fontWeight: FontWeight.w600,
+          //           ),
+          //         ),
+          //       ),
+          //     ),
+          //   ],
+          // ),
         ],
       ),
     ));
