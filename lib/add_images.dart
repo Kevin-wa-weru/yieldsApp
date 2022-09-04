@@ -325,7 +325,7 @@ class _AddImagesState extends State<AddImages> {
                       child: showSpinner == false
                           ? const Center(
                               child: Text(
-                                'Proceed',
+                                'Save',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,

@@ -1265,52 +1265,52 @@ class _AddRecordState extends State<AddRecord> {
             const SizedBox(
               height: 12,
             ),
-            Row(
-              children: const [
-                SizedBox(
-                  width: 35,
-                ),
-                Text(
-                  'Photos',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 15,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            Row(
-              children: [
-                const SizedBox(
-                  width: 35,
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AddImages(
-                                token: widget.token,
-                              )),
-                    );
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SizedBox(
-                      height: 30,
-                      width: 30,
-                      child: SvgPicture.asset('assets/photo.svg',
-                          color: Colors.green,
-                          height: 10,
-                          fit: BoxFit.fitHeight),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            // Row(
+            //   children: const [
+            //     SizedBox(
+            //       width: 35,
+            //     ),
+            //     Text(
+            //       'Photos',
+            //       style: TextStyle(
+            //         fontWeight: FontWeight.w600,
+            //         fontSize: 15,
+            //       ),
+            //     ),
+            //   ],
+            // ),
+            // const SizedBox(
+            //   height: 5,
+            // ),
+            // Row(
+            //   children: [
+            //     const SizedBox(
+            //       width: 35,
+            //     ),
+            //     InkWell(
+            //       onTap: () {
+            //         Navigator.push(
+            //           context,
+            //           MaterialPageRoute(
+            //               builder: (context) => AddImages(
+            //                     token: widget.token,
+            //                   )),
+            //         );
+            //       },
+            //       child: Padding(
+            //         padding: const EdgeInsets.all(8.0),
+            //         child: SizedBox(
+            //           height: 30,
+            //           width: 30,
+            //           child: SvgPicture.asset('assets/photo.svg',
+            //               color: Colors.green,
+            //               height: 10,
+            //               fit: BoxFit.fitHeight),
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),
