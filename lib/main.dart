@@ -376,174 +376,194 @@ class _HomePageState extends State<HomePage> {
 
   _farmList(index) {
     List<LatLng> resolveNumberOfSide(figure, length) {
-      if (length == 3) {
-        return [
-          LatLng(figure['figure']['coordinates'][0]['lat'],
-              figure['figure']['coordinates'][0]['lng']),
-          LatLng(figure['figure']['coordinates'][1]['lat'],
-              figure['figure']['coordinates'][1]['lng']),
-          LatLng(figure['figure']['coordinates'][2]['lat'],
-              figure['figure']['coordinates'][2]['lng']),
-        ];
-      }
-      if (length == 4) {
-        return [
-          LatLng(figure['figure']['coordinates'][0]['lat'],
-              figure['figure']['coordinates'][0]['lng']),
-          LatLng(figure['figure']['coordinates'][1]['lat'],
-              figure['figure']['coordinates'][1]['lng']),
-          LatLng(figure['figure']['coordinates'][2]['lat'],
-              figure['figure']['coordinates'][2]['lng']),
-          LatLng(figure['figure']['coordinates'][3]['lat'],
-              figure['figure']['coordinates'][3]['lng']),
-        ];
-      }
-      if (length == 5) {
-        return [
-          LatLng(figure['figure']['coordinates'][0]['lat'],
-              figure['figure']['coordinates'][0]['lng']),
-          LatLng(figure['figure']['coordinates'][1]['lat'],
-              figure['figure']['coordinates'][1]['lng']),
-          LatLng(figure['figure']['coordinates'][2]['lat'],
-              figure['figure']['coordinates'][2]['lng']),
-          LatLng(figure['figure']['coordinates'][3]['lat'],
-              figure['figure']['coordinates'][3]['lng']),
-          LatLng(figure['figure']['coordinates'][4]['lat'],
-              figure['figure']['coordinates'][4]['lng']),
-        ];
-      }
-      if (length == 6) {
-        return [
-          LatLng(figure['figure']['coordinates'][0]['lat'],
-              figure['figure']['coordinates'][0]['lng']),
-          LatLng(figure['figure']['coordinates'][1]['lat'],
-              figure['figure']['coordinates'][1]['lng']),
-          LatLng(figure['figure']['coordinates'][2]['lat'],
-              figure['figure']['coordinates'][2]['lng']),
-          LatLng(figure['figure']['coordinates'][3]['lat'],
-              figure['figure']['coordinates'][3]['lng']),
-          LatLng(figure['figure']['coordinates'][4]['lat'],
-              figure['figure']['coordinates'][4]['lng']),
-          LatLng(figure['figure']['coordinates'][5]['lat'],
-              figure['figure']['coordinates'][5]['lng']),
-        ];
-      }
-      if (length == 7) {
-        return [
-          LatLng(figure['figure']['coordinates'][0]['lat'],
-              figure['figure']['coordinates'][0]['lng']),
-          LatLng(figure['figure']['coordinates'][1]['lat'],
-              figure['figure']['coordinates'][1]['lng']),
-          LatLng(figure['figure']['coordinates'][2]['lat'],
-              figure['figure']['coordinates'][2]['lng']),
-          LatLng(figure['figure']['coordinates'][3]['lat'],
-              figure['figure']['coordinates'][3]['lng']),
-          LatLng(figure['figure']['coordinates'][4]['lat'],
-              figure['figure']['coordinates'][4]['lng']),
-          LatLng(figure['figure']['coordinates'][5]['lat'],
-              figure['figure']['coordinates'][5]['lng']),
-          LatLng(figure['figure']['coordinates'][6]['lat'],
-              figure['figure']['coordinates'][6]['lng']),
-        ];
+      // if (length == 3) {
+      //   return [
+      //     LatLng(figure['figure']['coordinates'][0]['lat'],
+      //         figure['figure']['coordinates'][0]['lng']),
+      //     LatLng(figure['figure']['coordinates'][1]['lat'],
+      //         figure['figure']['coordinates'][1]['lng']),
+      //     LatLng(figure['figure']['coordinates'][2]['lat'],
+      //         figure['figure']['coordinates'][2]['lng']),
+      //   ];
+      // }
+      // if (length == 4) {
+      //   return [
+      //     LatLng(figure['figure']['coordinates'][0]['lat'],
+      //         figure['figure']['coordinates'][0]['lng']),
+      //     LatLng(figure['figure']['coordinates'][1]['lat'],
+      //         figure['figure']['coordinates'][1]['lng']),
+      //     LatLng(figure['figure']['coordinates'][2]['lat'],
+      //         figure['figure']['coordinates'][2]['lng']),
+      //     LatLng(figure['figure']['coordinates'][3]['lat'],
+      //         figure['figure']['coordinates'][3]['lng']),
+      //   ];
+      // }
+      // if (length == 5) {
+      //   return [
+      //     LatLng(figure['figure']['coordinates'][0]['lat'],
+      //         figure['figure']['coordinates'][0]['lng']),
+      //     LatLng(figure['figure']['coordinates'][1]['lat'],
+      //         figure['figure']['coordinates'][1]['lng']),
+      //     LatLng(figure['figure']['coordinates'][2]['lat'],
+      //         figure['figure']['coordinates'][2]['lng']),
+      //     LatLng(figure['figure']['coordinates'][3]['lat'],
+      //         figure['figure']['coordinates'][3]['lng']),
+      //     LatLng(figure['figure']['coordinates'][4]['lat'],
+      //         figure['figure']['coordinates'][4]['lng']),
+      //   ];
+      // }
+      // if (length == 6) {
+      //   return [
+      //     LatLng(figure['figure']['coordinates'][0]['lat'],
+      //         figure['figure']['coordinates'][0]['lng']),
+      //     LatLng(figure['figure']['coordinates'][1]['lat'],
+      //         figure['figure']['coordinates'][1]['lng']),
+      //     LatLng(figure['figure']['coordinates'][2]['lat'],
+      //         figure['figure']['coordinates'][2]['lng']),
+      //     LatLng(figure['figure']['coordinates'][3]['lat'],
+      //         figure['figure']['coordinates'][3]['lng']),
+      //     LatLng(figure['figure']['coordinates'][4]['lat'],
+      //         figure['figure']['coordinates'][4]['lng']),
+      //     LatLng(figure['figure']['coordinates'][5]['lat'],
+      //         figure['figure']['coordinates'][5]['lng']),
+      //   ];
+      // }
+      // if (length == 7) {
+      //   return [
+      //     LatLng(figure['figure']['coordinates'][0]['lat'],
+      //         figure['figure']['coordinates'][0]['lng']),
+      //     LatLng(figure['figure']['coordinates'][1]['lat'],
+      //         figure['figure']['coordinates'][1]['lng']),
+      //     LatLng(figure['figure']['coordinates'][2]['lat'],
+      //         figure['figure']['coordinates'][2]['lng']),
+      //     LatLng(figure['figure']['coordinates'][3]['lat'],
+      //         figure['figure']['coordinates'][3]['lng']),
+      //     LatLng(figure['figure']['coordinates'][4]['lat'],
+      //         figure['figure']['coordinates'][4]['lng']),
+      //     LatLng(figure['figure']['coordinates'][5]['lat'],
+      //         figure['figure']['coordinates'][5]['lng']),
+      //     LatLng(figure['figure']['coordinates'][6]['lat'],
+      //         figure['figure']['coordinates'][6]['lng']),
+      //   ];
+      // }
+
+      // if (length == 8) {
+      //   return [
+      //     LatLng(figure['figure']['coordinates'][0]['lat'],
+      //         figure['figure']['coordinates'][0]['lng']),
+      //     LatLng(figure['figure']['coordinates'][1]['lat'],
+      //         figure['figure']['coordinates'][1]['lng']),
+      //     LatLng(figure['figure']['coordinates'][2]['lat'],
+      //         figure['figure']['coordinates'][2]['lng']),
+      //     LatLng(figure['figure']['coordinates'][3]['lat'],
+      //         figure['figure']['coordinates'][3]['lng']),
+      //     LatLng(figure['figure']['coordinates'][4]['lat'],
+      //         figure['figure']['coordinates'][4]['lng']),
+      //     LatLng(figure['figure']['coordinates'][5]['lat'],
+      //         figure['figure']['coordinates'][5]['lng']),
+      //     LatLng(figure['figure']['coordinates'][6]['lat'],
+      //         figure['figure']['coordinates'][6]['lng']),
+      //     LatLng(figure['figure']['coordinates'][7]['lat'],
+      //         figure['figure']['coordinates'][7]['lng']),
+      //   ];
+      // }
+      // if (length == 9) {
+      //   return [
+      //     LatLng(figure['figure']['coordinates'][0]['lat'],
+      //         figure['figure']['coordinates'][0]['lng']),
+      //     LatLng(figure['figure']['coordinates'][1]['lat'],
+      //         figure['figure']['coordinates'][1]['lng']),
+      //     LatLng(figure['figure']['coordinates'][2]['lat'],
+      //         figure['figure']['coordinates'][2]['lng']),
+      //     LatLng(figure['figure']['coordinates'][3]['lat'],
+      //         figure['figure']['coordinates'][3]['lng']),
+      //     LatLng(figure['figure']['coordinates'][4]['lat'],
+      //         figure['figure']['coordinates'][4]['lng']),
+      //     LatLng(figure['figure']['coordinates'][5]['lat'],
+      //         figure['figure']['coordinates'][5]['lng']),
+      //     LatLng(figure['figure']['coordinates'][6]['lat'],
+      //         figure['figure']['coordinates'][6]['lng']),
+      //     LatLng(figure['figure']['coordinates'][7]['lat'],
+      //         figure['figure']['coordinates'][7]['lng']),
+      //     LatLng(figure['figure']['coordinates'][6]['lat'],
+      //         figure['figure']['coordinates'][6]['lng']),
+      //   ];
+      // }
+      // if (length == 10) {
+      //   return [
+      //     LatLng(figure['figure']['coordinates'][0]['lat'],
+      //         figure['figure']['coordinates'][0]['lng']),
+      //     LatLng(figure['figure']['coordinates'][1]['lat'],
+      //         figure['figure']['coordinates'][1]['lng']),
+      //     LatLng(figure['figure']['coordinates'][2]['lat'],
+      //         figure['figure']['coordinates'][2]['lng']),
+      //     LatLng(figure['figure']['coordinates'][3]['lat'],
+      //         figure['figure']['coordinates'][3]['lng']),
+      //     LatLng(figure['figure']['coordinates'][4]['lat'],
+      //         figure['figure']['coordinates'][4]['lng']),
+      //     LatLng(figure['figure']['coordinates'][5]['lat'],
+      //         figure['figure']['coordinates'][5]['lng']),
+      //     LatLng(figure['figure']['coordinates'][6]['lat'],
+      //         figure['figure']['coordinates'][6]['lng']),
+      //     LatLng(figure['figure']['coordinates'][7]['lat'],
+      //         figure['figure']['coordinates'][7]['lng']),
+      //     LatLng(figure['figure']['coordinates'][8]['lat'],
+      //         figure['figure']['coordinates'][8]['lng']),
+      //     LatLng(figure['figure']['coordinates'][9]['lat'],
+      //         figure['figure']['coordinates'][9]['lng']),
+      //   ];
+      // }
+      // if (length == 11) {
+      //   return [
+      //     LatLng(figure['figure']['coordinates'][0]['lat'],
+      //         figure['figure']['coordinates'][0]['lng']),
+      //     LatLng(figure['figure']['coordinates'][1]['lat'],
+      //         figure['figure']['coordinates'][1]['lng']),
+      //     LatLng(figure['figure']['coordinates'][2]['lat'],
+      //         figure['figure']['coordinates'][2]['lng']),
+      //     LatLng(figure['figure']['coordinates'][3]['lat'],
+      //         figure['figure']['coordinates'][3]['lng']),
+      //     LatLng(figure['figure']['coordinates'][4]['lat'],
+      //         figure['figure']['coordinates'][4]['lng']),
+      //     LatLng(figure['figure']['coordinates'][5]['lat'],
+      //         figure['figure']['coordinates'][5]['lng']),
+      //     LatLng(figure['figure']['coordinates'][6]['lat'],
+      //         figure['figure']['coordinates'][6]['lng']),
+      //     LatLng(figure['figure']['coordinates'][7]['lat'],
+      //         figure['figure']['coordinates'][7]['lng']),
+      //     LatLng(figure['figure']['coordinates'][8]['lat'],
+      //         figure['figure']['coordinates'][8]['lng']),
+      //     LatLng(figure['figure']['coordinates'][9]['lat'],
+      //         figure['figure']['coordinates'][9]['lng']),
+      //     LatLng(figure['figure']['coordinates'][10]['lat'],
+      //         figure['figure']['coordinates'][10]['lng']),
+      //   ];
+      // }
+
+      List<LatLng> helper = [];
+      for (var i = 0; i < length; i++) {
+        helper.add(LatLng(figure['figure']['coordinates'][i]['lat'],
+            figure['figure']['coordinates'][i]['lng']));
       }
 
-      if (length == 8) {
-        return [
-          LatLng(figure['figure']['coordinates'][0]['lat'],
-              figure['figure']['coordinates'][0]['lng']),
-          LatLng(figure['figure']['coordinates'][1]['lat'],
-              figure['figure']['coordinates'][1]['lng']),
-          LatLng(figure['figure']['coordinates'][2]['lat'],
-              figure['figure']['coordinates'][2]['lng']),
-          LatLng(figure['figure']['coordinates'][3]['lat'],
-              figure['figure']['coordinates'][3]['lng']),
-          LatLng(figure['figure']['coordinates'][4]['lat'],
-              figure['figure']['coordinates'][4]['lng']),
-          LatLng(figure['figure']['coordinates'][5]['lat'],
-              figure['figure']['coordinates'][5]['lng']),
-          LatLng(figure['figure']['coordinates'][6]['lat'],
-              figure['figure']['coordinates'][6]['lng']),
-          LatLng(figure['figure']['coordinates'][7]['lat'],
-              figure['figure']['coordinates'][7]['lng']),
-        ];
-      }
-      if (length == 9) {
-        return [
-          LatLng(figure['figure']['coordinates'][0]['lat'],
-              figure['figure']['coordinates'][0]['lng']),
-          LatLng(figure['figure']['coordinates'][1]['lat'],
-              figure['figure']['coordinates'][1]['lng']),
-          LatLng(figure['figure']['coordinates'][2]['lat'],
-              figure['figure']['coordinates'][2]['lng']),
-          LatLng(figure['figure']['coordinates'][3]['lat'],
-              figure['figure']['coordinates'][3]['lng']),
-          LatLng(figure['figure']['coordinates'][4]['lat'],
-              figure['figure']['coordinates'][4]['lng']),
-          LatLng(figure['figure']['coordinates'][5]['lat'],
-              figure['figure']['coordinates'][5]['lng']),
-          LatLng(figure['figure']['coordinates'][6]['lat'],
-              figure['figure']['coordinates'][6]['lng']),
-          LatLng(figure['figure']['coordinates'][7]['lat'],
-              figure['figure']['coordinates'][7]['lng']),
-          LatLng(figure['figure']['coordinates'][6]['lat'],
-              figure['figure']['coordinates'][6]['lng']),
-        ];
-      }
-      if (length == 10) {
-        return [
-          LatLng(figure['figure']['coordinates'][0]['lat'],
-              figure['figure']['coordinates'][0]['lng']),
-          LatLng(figure['figure']['coordinates'][1]['lat'],
-              figure['figure']['coordinates'][1]['lng']),
-          LatLng(figure['figure']['coordinates'][2]['lat'],
-              figure['figure']['coordinates'][2]['lng']),
-          LatLng(figure['figure']['coordinates'][3]['lat'],
-              figure['figure']['coordinates'][3]['lng']),
-          LatLng(figure['figure']['coordinates'][4]['lat'],
-              figure['figure']['coordinates'][4]['lng']),
-          LatLng(figure['figure']['coordinates'][5]['lat'],
-              figure['figure']['coordinates'][5]['lng']),
-          LatLng(figure['figure']['coordinates'][6]['lat'],
-              figure['figure']['coordinates'][6]['lng']),
-          LatLng(figure['figure']['coordinates'][7]['lat'],
-              figure['figure']['coordinates'][7]['lng']),
-          LatLng(figure['figure']['coordinates'][8]['lat'],
-              figure['figure']['coordinates'][8]['lng']),
-          LatLng(figure['figure']['coordinates'][9]['lat'],
-              figure['figure']['coordinates'][9]['lng']),
-        ];
-      }
-      if (length == 11) {
-        return [
-          LatLng(figure['figure']['coordinates'][0]['lat'],
-              figure['figure']['coordinates'][0]['lng']),
-          LatLng(figure['figure']['coordinates'][1]['lat'],
-              figure['figure']['coordinates'][1]['lng']),
-          LatLng(figure['figure']['coordinates'][2]['lat'],
-              figure['figure']['coordinates'][2]['lng']),
-          LatLng(figure['figure']['coordinates'][3]['lat'],
-              figure['figure']['coordinates'][3]['lng']),
-          LatLng(figure['figure']['coordinates'][4]['lat'],
-              figure['figure']['coordinates'][4]['lng']),
-          LatLng(figure['figure']['coordinates'][5]['lat'],
-              figure['figure']['coordinates'][5]['lng']),
-          LatLng(figure['figure']['coordinates'][6]['lat'],
-              figure['figure']['coordinates'][6]['lng']),
-          LatLng(figure['figure']['coordinates'][7]['lat'],
-              figure['figure']['coordinates'][7]['lng']),
-          LatLng(figure['figure']['coordinates'][8]['lat'],
-              figure['figure']['coordinates'][8]['lng']),
-          LatLng(figure['figure']['coordinates'][9]['lat'],
-              figure['figure']['coordinates'][9]['lng']),
-          LatLng(figure['figure']['coordinates'][10]['lat'],
-              figure['figure']['coordinates'][10]['lng']),
-        ];
-      }
+      print('WE ARE HERE');
 
-      return [
-        LatLng(double.parse(figure['figure']['coordinates'][0]['lat']),
-            double.parse(figure['figure']['coordinates'][0]['lng'])),
-      ];
+      print(helper);
+
+      return helper;
+
+      // print('WE ARE HEREREE');
+
+      // print(figure['figure']['coordinates'][0]['lat']);
+
+      // print(figure['figure']['coordinates'][0]['lat'].runtimeType);
+
+      // print(length);
+
+      // return [
+      //   LatLng(double.parse(figure['figure']['coordinates'][0]['lat']),
+      //       double.parse(figure['figure']['coordinates'][0]['lng'])),
+      // ];
     }
 
     return AnimatedBuilder(
